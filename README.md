@@ -742,20 +742,40 @@ run("Options...", "iterations=10 count=5 black edm=8-bit do=[Fill Holes]");
 run("Options...", "iterations=10 count=11 black edm=8-bit do=[Erode]");
 run("Options...", "iterations=10 count=11 black edm=8-bit do=[Dilate]");
 
-setTool("polygon");
-waitForUser("Outline GC ki67+ GC regions");
-roiManager("Add");
-GCOutlineSel= roiManager("count")-1;
-roiManager("Select", GCOutlineSel);
-roiManager("Rename", "GCOutlineSel");
-setForegroundColor(255, 255, 255);
-run("Fill", "slice");
-roiManager("Select", GCOutlineSel);
-run("Make Inverse");
-changeValues(0, 65535, 0);
+setMinAndMax(0, 255);
 run("Select None");
+run("Analyze Particles...", "size=100-Infinity show=[Count Masks] display summarize add");
+run("glasbey");
+run("Enhance Contrast", "saturated=0.35");
+
+run("Point Tool...");
+setTool("multipoint");
+waitForUser("Select GC") // Select delete in secondary window
+getSelectionCoordinates(xpoints, ypoints)
+
+for (o=0; o<xpoints.length; o=o+1){
+	value=getPixel(xpoints[o], ypoints[o]);
+	changeValues(value, value, 255);
+	print(o, value);
+}
+
+changeValues(0, 254, 0);
+changeValues(256,65000,0);
+run("Select None");
+run("8-bit");
+run("Convert to Mask");
 run("Create Selection");
 roiManager("Add");
+GC= roiManager("count")-1;
+roiManager("Select", GC);
+roiManager("Rename", "GC"); 
+
+//run("Make Inverse");
+run("Convex Hull");
+run("Create Mask");
+run("Create Selection");
+roiManager("Add");
+
 GCOutline= roiManager("count")-1;
 roiManager("Select", GCOutline);
 roiManager("Rename", "GCOutline");
