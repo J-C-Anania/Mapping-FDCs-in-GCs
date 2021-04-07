@@ -1,5 +1,5 @@
 # Mapping-FDCs-in-GCs
-Macro utilized in J.C. Anania et al 2020 Frontiers in Immunology A novel image analysis approach reveals a role for complement receptors 1 and 2 in follicular dendritic cell (FDC) organization in germinal centers (GCs)
+Macro utilized in J.C. Anania et al 2020 Frontiers in Immunology A novel image analysis approach reveals a role for complement receptors 1 and 2 in follicular dendritic cell (FDC) organization in germinal centers (GCs) doi: 10.3389/fimmu.2021.655753
 
 Image J macro defines splenic white pulp, B cell follicle, GCs, LZ and DZ regions of interest (ROI) and maps distribution of FDC-M1 poditive FDCs with ROIs. FDC distance from ROI centre/edge (EDM) and organization (cluster analysis) were measured.
 
